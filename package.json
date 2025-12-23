@@ -1,0 +1,27 @@
+{
+  "name": "ai-superman-djy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "gen": "node scripts/generate-images.js",
+    "gen:all": "node scripts/generate-images.js --all",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiangjinggit/ai-superman-djy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/jiangjinggit/ai-superman-djy/issues"
+  },
+  "homepage": "https://github.com/jiangjinggit/ai-superman-djy#readme",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "dotenv": "^17.2.3"
+  }
+}
