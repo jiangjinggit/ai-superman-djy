@@ -1,34 +1,27 @@
 /**
  * AI图片生成脚本
- * 读取文章中的提示词，调用Gemini API生成图片
+ * 支持多服务切换：硅基流动（免费）、Gemini（付费）、智谱清言（免费）
  *
  * 使用方法：
- *   npm run gen content/articles/xxx.md  # 生成指定文章的图片
- *   npm run gen:all                       # 生成所有文章的图片
+ *   npm run gen <文章路径>     # 生成指定文章的图片
+ *   npm run gen:all           # 生成所有文章的图片
+ *   npm run gen -- --list     # 列出可用服务
  */
 
 require('dotenv').config();
-const { GoogleGenerativeAI } = require('@google/generative-ai');
 const fs = require('fs');
 const path = require('path');
-
-// 检查API Key
-if (!process.env.GEMINI_API_KEY) {
-  console.error('❌ 错误：请在 .env 文件中配置 GEMINI_API_KEY');
-  console.error('   参考 .env.example 文件');
-  process.exit(1);
-}
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const { getProvider, listProviders } = require('./providers');
 
 // 项目根目录
 const ROOT_DIR = path.join(__dirname, '..');
 const ASSETS_DIR = path.join(ROOT_DIR, 'content', 'assets');
 
+// 默认服务（可在.env中配置 IMAGE_PROVIDER）
+const DEFAULT_PROVIDER = 'siliconflow';
+
 /**
  * 从Markdown文件中提取图片提示词
- * @param {string} content - Markdown内容
- * @returns {Array} 提示词数组
  */
 function extractPrompts(content) {
   const prompts = [];
@@ -45,7 +38,7 @@ function extractPrompts(content) {
   const imageBlocks = section.split(/### 图\d+：|### 封面图|### 片头|### 片尾|### 文中配图/).slice(1);
 
   for (const block of imageBlocks) {
-    // 提取图片名称（第一行）
+    // 提取图片名称
     const nameMatch = block.match(/^(.+?)[\n\r]/);
     const name = nameMatch ? nameMatch[1].trim() : '未命名';
 
@@ -58,7 +51,7 @@ function extractPrompts(content) {
       const arMatch = prompt.match(/--ar\s+([\d:.]+)/);
       const aspectRatio = arMatch ? arMatch[1] : '1:1';
 
-      // 移除Midjourney特有参数（Gemini不支持）
+      // 移除Midjourney特有参数
       prompt = prompt.replace(/--ar\s+[\d:.]+/g, '')
                      .replace(/--style\s+\w+/g, '')
                      .replace(/--v\s+[\d.]+/g, '')
@@ -68,7 +61,6 @@ function extractPrompts(content) {
         name: name,
         prompt: prompt,
         aspectRatio: aspectRatio,
-        originalBlock: block
       });
     }
   }
@@ -77,59 +69,15 @@ function extractPrompts(content) {
 }
 
 /**
- * 调用Gemini API生成图片
- * @param {string} prompt - 图片提示词
- * @returns {Buffer} 图片数据
- */
-async function generateImage(prompt) {
-  const model = genAI.getGenerativeModel({
-    model: 'gemini-2.0-flash-preview-image-generation'
-  });
-
-  try {
-    const result = await model.generateContent({
-      contents: [{
-        role: 'user',
-        parts: [{ text: `Generate an image: ${prompt}` }]
-      }],
-      generationConfig: {
-        responseModalities: ['TEXT', 'IMAGE']
-      }
-    });
-
-    const response = await result.response;
-
-    // 查找图片部分
-    for (const candidate of response.candidates || []) {
-      for (const part of candidate.content?.parts || []) {
-        if (part.inlineData) {
-          return Buffer.from(part.inlineData.data, 'base64');
-        }
-      }
-    }
-
-    throw new Error('API返回中没有找到图片数据');
-  } catch (error) {
-    throw new Error(`图片生成失败: ${error.message}`);
-  }
-}
-
-/**
  * 保存图片到文件
- * @param {Buffer} imageData - 图片数据
- * @param {string} filename - 文件名
- * @param {string} dateFolder - 日期文件夹
- * @returns {string} 保存的文件路径
  */
 function saveImage(imageData, filename, dateFolder) {
   const folderPath = path.join(ASSETS_DIR, dateFolder);
 
-  // 创建目录
   if (!fs.existsSync(folderPath)) {
     fs.mkdirSync(folderPath, { recursive: true });
   }
 
-  // 清理文件名
   const safeName = filename
     .replace(/[：:]/g, '-')
     .replace(/[^\w\u4e00-\u9fa5\-]/g, '')
@@ -143,20 +91,16 @@ function saveImage(imageData, filename, dateFolder) {
 
 /**
  * 处理单个文章
- * @param {string} articlePath - 文章路径
  */
-async function processArticle(articlePath) {
+async function processArticle(articlePath, provider) {
   console.log(`\n📄 处理文章: ${path.basename(articlePath)}`);
 
-  // 读取文章内容
   const content = fs.readFileSync(articlePath, 'utf-8');
-
-  // 提取提示词
   const prompts = extractPrompts(content);
 
   if (prompts.length === 0) {
     console.log('   ⚠️  未找到配图提示词，跳过');
-    return;
+    return { success: 0, failed: 0 };
   }
 
   console.log(`   找到 ${prompts.length} 个配图提示词`);
@@ -165,30 +109,35 @@ async function processArticle(articlePath) {
   const dateMatch = path.basename(articlePath).match(/^(\d{4}-\d{2}-\d{2})/);
   const dateFolder = dateMatch ? dateMatch[1] : new Date().toISOString().split('T')[0];
 
-  // 逐个生成图片
+  let success = 0;
+  let failed = 0;
+
   for (let i = 0; i < prompts.length; i++) {
-    const { name, prompt } = prompts[i];
+    const { name, prompt, aspectRatio } = prompts[i];
     console.log(`\n   🎨 [${i + 1}/${prompts.length}] 生成: ${name}`);
-    console.log(`      提示词: ${prompt.substring(0, 60)}...`);
+    console.log(`      提示词: ${prompt.substring(0, 50)}...`);
 
     try {
-      const imageData = await generateImage(prompt);
+      const imageData = await provider.generateImage(prompt, { aspectRatio });
       const savedPath = saveImage(imageData, `${i + 1}-${name}`, dateFolder);
       console.log(`      ✅ 保存到: ${path.relative(ROOT_DIR, savedPath)}`);
+      success++;
     } catch (error) {
       console.error(`      ❌ 失败: ${error.message}`);
+      failed++;
     }
 
-    // 避免API限流，间隔2秒
+    // 避免API限流
     if (i < prompts.length - 1) {
       await new Promise(resolve => setTimeout(resolve, 2000));
     }
   }
+
+  return { success, failed };
 }
 
 /**
  * 查找所有包含提示词的文章
- * @returns {Array} 文章路径数组
  */
 function findAllArticles() {
   const articlesDir = path.join(ROOT_DIR, 'content', 'articles');
@@ -196,19 +145,16 @@ function findAllArticles() {
 
   const articles = [];
 
-  // 扫描articles目录
   if (fs.existsSync(articlesDir)) {
     const files = fs.readdirSync(articlesDir).filter(f => f.endsWith('.md'));
     articles.push(...files.map(f => path.join(articlesDir, f)));
   }
 
-  // 扫描scripts目录
   if (fs.existsSync(scriptsDir)) {
     const files = fs.readdirSync(scriptsDir).filter(f => f.endsWith('.md'));
     articles.push(...files.map(f => path.join(scriptsDir, f)));
   }
 
-  // 过滤出包含提示词的文件
   return articles.filter(articlePath => {
     const content = fs.readFileSync(articlePath, 'utf-8');
     return content.includes('## 配图提示词');
@@ -216,16 +162,57 @@ function findAllArticles() {
 }
 
 /**
+ * 显示可用服务列表
+ */
+function showProviders() {
+  console.log('\n📋 可用的图片生成服务:\n');
+
+  const providers = listProviders();
+  providers.forEach((p, i) => {
+    const freeTag = p.free ? '🆓 免费' : '💰 付费';
+    const proxyTag = p.needProxy ? '🌐 需代理' : '🇨🇳 国内直连';
+    console.log(`   ${i + 1}. ${p.displayName}`);
+    console.log(`      ${freeTag} | ${proxyTag}`);
+    console.log(`      ${p.description}\n`);
+  });
+
+  console.log('💡 切换服务方法：在 .env 中设置 IMAGE_PROVIDER=服务名');
+  console.log('   例如：IMAGE_PROVIDER=siliconflow\n');
+}
+
+/**
  * 主函数
  */
 async function main() {
+  const args = process.argv.slice(2);
+
+  // 显示服务列表
+  if (args.includes('--list') || args.includes('-l')) {
+    showProviders();
+    return;
+  }
+
   console.log('🚀 AI图片生成工具');
   console.log('==================\n');
 
-  const args = process.argv.slice(2);
+  // 获取服务
+  const providerName = process.env.IMAGE_PROVIDER || DEFAULT_PROVIDER;
+  let provider;
 
+  try {
+    provider = getProvider(providerName);
+    const info = provider.getInfo();
+    console.log(`📦 当前服务: ${info.name}`);
+    console.log(`   模型: ${info.model}`);
+    console.log(`   免费: ${info.free ? '是' : '否'}\n`);
+  } catch (error) {
+    console.error(`❌ ${error.message}`);
+    console.log('\n💡 提示：运行 npm run gen -- --list 查看可用服务');
+    process.exit(1);
+  }
+
+  // 处理文章
   if (args.includes('--all')) {
-    // 批量生成所有文章的图片
     console.log('📂 扫描所有文章...');
     const articles = findAllArticles();
 
@@ -236,11 +223,18 @@ async function main() {
 
     console.log(`找到 ${articles.length} 篇文章需要处理`);
 
+    let totalSuccess = 0;
+    let totalFailed = 0;
+
     for (const article of articles) {
-      await processArticle(article);
+      const { success, failed } = await processArticle(article, provider);
+      totalSuccess += success;
+      totalFailed += failed;
     }
-  } else if (args.length > 0) {
-    // 处理指定文章
+
+    console.log(`\n📊 统计: 成功 ${totalSuccess} 张, 失败 ${totalFailed} 张`);
+
+  } else if (args.length > 0 && !args[0].startsWith('-')) {
     const articlePath = path.resolve(args[0]);
 
     if (!fs.existsSync(articlePath)) {
@@ -248,12 +242,14 @@ async function main() {
       process.exit(1);
     }
 
-    await processArticle(articlePath);
+    const { success, failed } = await processArticle(articlePath, provider);
+    console.log(`\n📊 统计: 成功 ${success} 张, 失败 ${failed} 张`);
+
   } else {
-    // 显示帮助
     console.log('使用方法:');
     console.log('  npm run gen <文章路径>   生成指定文章的图片');
     console.log('  npm run gen:all          生成所有文章的图片');
+    console.log('  npm run gen -- --list    列出可用服务');
     console.log('');
     console.log('示例:');
     console.log('  npm run gen content/articles/2026-01-01-wechat-用AI重塑自己.md');

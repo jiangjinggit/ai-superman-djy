@@ -6,6 +6,14 @@
   "scripts": {
     "gen": "node scripts/generate-images.js",
     "gen:all": "node scripts/generate-images.js --all",
+    "video": "node scripts/generate-video.js",
+    "video:help": "node scripts/generate-video.js --help",
+    "video:voices": "node scripts/generate-video.js --voices",
+    "create": "node scripts/create-content.js",
+    "create:images": "node scripts/create-content.js --images-only",
+    "create:extract": "node scripts/create-content.js --extract",
+    "login": "node scripts/gemini-browser.js --login",
+    "login:check": "node scripts/gemini-browser.js --check",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,6 +30,10 @@
   "homepage": "https://github.com/jiangjinggit/ai-superman-djy#readme",
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
-    "dotenv": "^17.2.3"
+    "dotenv": "^17.2.3",
+    "global-agent": "^3.0.0",
+    "https-proxy-agent": "^7.0.6",
+    "playwright": "^1.57.0",
+    "undici": "^7.16.0"
   }
 }

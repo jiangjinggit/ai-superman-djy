@@ -17,3 +17,9 @@ Thumbs.db
 # 日志文件
 *.log
 npm-debug.log*
+
+# 浏览器数据（登录状态）
+.browser-data/
+
+# Playwright MCP 临时文件
+.playwright-mcp/
