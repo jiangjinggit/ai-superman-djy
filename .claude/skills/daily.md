@@ -22,10 +22,12 @@
 | 平台 | 文件名格式 | 配图数量 | 图片比例 |
 |-----|-----------|---------|---------|
 | 小红书 | `日期-xiaohongshu-标题.md` | 6张 | 3:4 竖版 |
-| 公众号 | `日期-wechat-标题.md` | 4张 | 16:9 横版 |
+| 公众号 | `日期-wechat-标题.md` + `.html` | 4张 | 16:9 横版 |
 | 掘金 | `日期-juejin-标题.md` | 3张 | 16:9 横版 |
 
 每篇文章末尾必须包含 `## 配图提示词` 部分。
+
+**公众号特殊要求**：同时生成 `.md` 和 `.html` 两个文件，HTML 使用青色主题。
 
 ### 步骤2：用 MCP Playwright 生成配图
 
@@ -91,6 +93,33 @@
 - 风格：深度、专业、有价值
 - 标题：清晰、有信息量
 - 字数：1500-2500字
+- **主题色**：青色 `#06B6D4`
+- **输出格式**：同时生成 `.md` 和 `.html` 文件
+
+### 公众号 HTML 模板样式
+
+```html
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  h1 { font-size: 22px; font-weight: bold; text-align: center; margin-bottom: 20px; }
+  h2 { font-size: 18px; font-weight: bold; color: #1a1a1a; margin-top: 30px; margin-bottom: 15px; border-left: 4px solid #06B6D4; padding-left: 12px; }
+  h3 { font-size: 16px; font-weight: bold; color: #333; margin-top: 20px; margin-bottom: 10px; }
+  p { margin: 15px 0; text-align: justify; }
+  blockquote { background: #f0fdfa; border-left: 4px solid #06B6D4; padding: 10px 15px; margin: 15px 0; color: #666; font-size: 14px; }
+  strong { color: #06B6D4; }
+  ul, ol { padding-left: 20px; margin: 15px 0; }
+  li { margin: 8px 0; }
+  hr { border: none; border-top: 1px solid #eee; margin: 25px 0; }
+</style>
+```
 
 ### 掘金
 - 风格：技术向、有代码、有干货
