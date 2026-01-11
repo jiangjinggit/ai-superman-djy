@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="81ce1568-bc52-4034-854c-24531adf664e" name="更改" comment="加上掘金和小红书">
+      <change beforePath="$PROJECT_DIR$/.claude/skills/daily.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.claude/skills/gen-images.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.claude/skills/idea.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ai-superman-djy.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TOPICS.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WORKFLOW.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/articles/2026-01-09-juejin-一个人用AI做了一个完整产品.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/articles/2026-01-09-wechat-一个人用AI做了一个完整产品.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/articles/2026-01-09-wechat-一个人用AI做了一个完整产品.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/articles/2026-01-09-xiaohongshu-一个人用AI做了一个完整产品.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/articles/2026-01-09-xiaohongshu-一个人用AI做了一个完整产品.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/assets/2026-01-09/juejin-图1-技术架构.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/assets/2026-01-09/juejin-图2-AI协作流程.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/assets/2026-01-09/juejin-图3-效率对比.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/assets/2026-01-09/wechat/产品演示.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/assets/2026-01-09/wechat/图1-封面图.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/assets/2026-01-09/wechat/图2-收藏从未停止.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/assets/2026-01-09/wechat/图3-AI团队协作.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/assets/2026-01-09/wechat/图4-开始行动.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/assets/2026-01-09/xiaohongshu-图1-一人成军.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/assets/2026-01-09/xiaohongshu-图2-AI团队.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/assets/2026-01-09/xiaohongshu-图3-效率对比.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/assets/2026-01-09/xiaohongshu-图4-超级个体三要素.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/assets/2026-01-09/xiaohongshu-图5-福利预告.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/assets/2026-01-09/xiaohongshu-图6-关注引导.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plans/2026-plan.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/create-content.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/gemini-browser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/generate-all-images.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/generate-images.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/generate-video.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/providers/gemini.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/providers/gemini3.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/providers/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/providers/siliconflow.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/providers/zhipu.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/video/script-parser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/video/subtitle-generator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/video/tts-provider.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/video/video-composer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/juejin.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/video-script-auto.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/video-script.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wechat.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/xiaohongshu.md" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;jiangjinggit&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/jiangjinggit/ai-superman-djy&quot;,
+    &quot;accountId&quot;: &quot;6968d2ab-bee7-41b3-821f-12a3a9cd5c0b&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="37FX2XlZsK1t434snBnYlQ9Pz3D" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "feature/test",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/daipeiyuan/aiProject/ai-superman-djy",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-cffe25b9f5b3-intellij.indexing.shared.core-IU-253.28294.334" />
+        <option value="bundled-js-predefined-d6986cc7102b-c7e53b3be11b-JavaScript-IU-253.28294.334" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="81ce1568-bc52-4034-854c-24531adf664e" name="更改" comment="" />
+      <created>1766499585592</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1766499585592</updated>
+      <workItem from="1766499586614" duration="41849000" />
+      <workItem from="1766752689002" duration="46607000" />
+      <workItem from="1768106708563" duration="3013000" />
+      <workItem from="1768110721038" duration="359000" />
+    </task>
+    <task id="LOCAL-00001" summary="项目初始化：自媒体执行计划">
+      <option name="closed" value="true" />
+      <created>1766501217560</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1766501217560</updated>
+    </task>
+    <task id="LOCAL-00002" summary="自动生成图片相关代码">
+      <option name="closed" value="true" />
+      <created>1766506726751</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1766506726751</updated>
+    </task>
+    <task id="LOCAL-00003" summary="自动生成图片相关代码">
+      <option name="closed" value="true" />
+      <created>1767970989652</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1767970989652</updated>
+    </task>
+    <task id="LOCAL-00004" summary="新增2026-01-09文章">
+      <option name="closed" value="true" />
+      <created>1768036799014</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1768036799014</updated>
+    </task>
+    <task id="LOCAL-00005" summary="优化CLAUDE.md和Skills">
+      <option name="closed" value="true" />
+      <created>1768038323595</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1768038323595</updated>
+    </task>
+    <task id="LOCAL-00006" summary="删除01-01和01-02无用的内容">
+      <option name="closed" value="true" />
+      <created>1768038549870</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1768038549870</updated>
+    </task>
+    <task id="LOCAL-00007" summary="优化">
+      <option name="closed" value="true" />
+      <created>1768040202527</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1768040202527</updated>
+    </task>
+    <task id="LOCAL-00008" summary="加上掘金和小红书">
+      <option name="closed" value="true" />
+      <created>1768109012433</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1768109012433</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="项目初始化：自媒体执行计划" />
+    <MESSAGE value="自动生成图片相关代码" />
+    <MESSAGE value="新增2026-01-09文章" />
+    <MESSAGE value="优化CLAUDE.md和Skills" />
+    <MESSAGE value="删除01-01和01-02无用的内容" />
+    <MESSAGE value="优化" />
+    <MESSAGE value="加上掘金和小红书" />
+    <option name="LAST_COMMIT_MESSAGE" value="加上掘金和小红书" />
+  </component>
+</project>
