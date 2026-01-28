@@ -4,15 +4,19 @@
 
 ## 与主应用协同
 
-所有内容创作需服务于 **AI Superman 平台** 的推广：
-- 文章末尾必须包含**福利钩子**：免费使用 Claude Opus 4.5
-- 内容要自然引导到平台功能（Claude Code、AI导航、AI学习等）
+所有内容创作需服务于 **AI Superman DJY 平台** 的推广：
+- 文章末尾必须包含**福利环节**：免费使用 Claude 顶尖模型
+- 福利文案必须包含“点赞+关注+私信”
+- 内容要自然引导到平台功能（Claude Code、AI导航、AI热点、AI学习等）
+- 文中适度提及 AI 热点模块（如多模态、Agent、模型发布等）
+- 说明 Claude Code 适用于多行业场景，不仅是写代码/改代码
 - 避免硬广，以真实体验和价值分享为主
 
 ## 触发格式
 
 ```
 /daily 2026-01-03 主题：Cursor使用技巧入门
+/daily 2026-01-03 主题：Cursor使用技巧入门 --images
 ```
 
 或自然语言：
@@ -33,10 +37,35 @@
 | 掘金 | `日期-juejin-标题.md` | 3张 | 16:9 横版 |
 
 每篇文章末尾必须包含 `## 配图提示词` 部分。
+正文中按配图顺序插入占位符，统一格式为：
+- `[图1]`、`[图2]`...（Markdown 与纯文本）
+- HTML 中用 `<p>[图1]</p>` 形式
 
 **公众号特殊要求**：同时生成 `.md` 和 `.html` 两个文件，HTML 使用青色主题。
 
-### 步骤2：用 MCP Playwright 生成配图
+### 步骤2：更新主题记录
+
+在 `TOPICS.md` 的已发布主题表格中添加新记录。
+
+### 步骤3：先返回文章结果，等待确认
+
+在生成图片前先停下来，让用户确认主题/文章是否 OK。
+用户确认后，才继续生成图片（除非用户显式加 `--images`）。
+
+```
+✅ 日期 文章生成完成（待确认）
+
+文章：
+- content/articles/日期-xiaohongshu-xxx.md
+- content/articles/日期-wechat-xxx.md
+- content/articles/日期-juejin-xxx.md
+
+如需生成配图，请回复“继续生成图片”或使用 `/daily 日期 主题：xxx --images`。
+```
+
+### 步骤4：用户确认后生成配图
+
+用 MCP Playwright 生成配图：
 
 1. 打开 Gemini (https://gemini.google.com)
 2. 逐张输入提示词生成图片
@@ -44,11 +73,7 @@
 4. 整理到 `content/assets/日期/` 目录
 5. 按平台和序号重命名
 
-### 步骤3：更新主题记录
-
-在 `TOPICS.md` 的已发布主题表格中添加新记录。
-
-### 步骤4：返回完成报告
+### 步骤5：返回最终完成报告
 
 ```
 ✅ 日期 内容生成完成
@@ -119,7 +144,18 @@
     padding: 20px;
   }
   h1 { font-size: 22px; font-weight: bold; text-align: center; margin-bottom: 20px; }
-  h2 { font-size: 18px; font-weight: bold; color: #1a1a1a; margin-top: 30px; margin-bottom: 15px; border-left: 4px solid #06B6D4; padding-left: 12px; }
+  h2 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background: #06B6D4;
+    display: inline-block;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    padding: 6px 16px;
+    border-radius: 4px;
+  }
+  h2 { display: table; margin-left: auto; margin-right: auto; }
   h3 { font-size: 16px; font-weight: bold; color: #333; margin-top: 20px; margin-bottom: 10px; }
   p { margin: 15px 0; text-align: justify; }
   blockquote { background: #f0fdfa; border-left: 4px solid #06B6D4; padding: 10px 15px; margin: 15px 0; color: #666; font-size: 14px; }

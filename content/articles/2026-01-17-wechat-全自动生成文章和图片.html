@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<title>第一次写文章花了半天，我用爆火 skills 把内容生产一键化</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  h1 { font-size: 22px; font-weight: bold; text-align: center; margin-bottom: 20px; }
+  h2 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background: #06B6D4;
+    display: inline-block;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    padding: 6px 16px;
+    border-radius: 4px;
+  }
+  h2 { display: table; margin-left: auto; margin-right: auto; }
+  h3 { font-size: 16px; font-weight: bold; color: #333; margin-top: 20px; margin-bottom: 10px; }
+  p { margin: 15px 0; text-align: justify; }
+  blockquote { background: #f0fdfa; border-left: 4px solid #06B6D4; padding: 10px 15px; margin: 15px 0; color: #666; font-size: 14px; }
+  strong { color: #06B6D4; }
+  ul, ol { padding-left: 20px; margin: 15px 0; }
+  li { margin: 8px 0; }
+  hr { border: none; border-top: 1px solid #eee; margin: 25px 0; }
+</style>
+</head>
+<body>
+  <h1>第一次写文章花了半天，我用爆火 skills 把内容生产一键化</h1>
+
+  <blockquote>关键词：自动化内容、AI写作、Gemini、Claude、效率提升</blockquote>
+
+  <p>[图1]</p>
+
+  <h2>引言</h2>
+  <p>每天稳定输出内容，其实不是“灵感多”，而是“流程稳”。</p>
+  <p>第一次写文章那次，我从中午写到深夜：想主题、写正文、找配图、排版、检查。每个环节都很耗时间，而且只要某一步卡住，整条链就断了。</p>
+  <p>后来我做了一件事：把这条链拆成<strong>可执行的 skills</strong>，让它变成一键流程。</p>
+  <p>读完这篇你会拿到：</p>
+  <ul>
+    <li>一套“选题→文章→配图”的自动化方法</li>
+    <li>可复制的技能设计思路</li>
+    <li>质量不翻车的实操要点</li>
+  </ul>
+
+  <hr />
+
+  <h2>一、为什么一定要做自动化？</h2>
+  <p>因为内容生产的成本，往往被低估。</p>
+  <p>你以为你在“写一篇文章”，其实你在做<strong>十几次小决策</strong>：标题要不要改、配图风格选什么、平台适配怎么做……这些决策加起来，才是消耗最大的地方。</p>
+  <p>自动化的价值在于：</p>
+  <ul>
+    <li>把“重复劳动”交给流程</li>
+    <li>把“脑力消耗”聚焦在选题和观点</li>
+    <li>把“输出不稳定”变成可控的节奏</li>
+  </ul>
+
+  <hr />
+
+  <h2>二、我把流程拆成 3 个技能</h2>
+  <p>[图2]</p>
+
+  <h3>1）/idea：自动给出选题</h3>
+  <p>从 <code>TOPICS.md</code> 里读取目标和主题池，输出 5 个推荐主题。它让“选题”从凭感觉变成有方向。</p>
+
+  <h3>2）/daily：一键生成三平台文章 + 配图</h3>
+  <p>一次性生成：小红书（更轻松）、公众号（更深度）、掘金（更技术）。<code>/daily</code> 会自动调用配图流程，每篇文章末尾都会自动生成配图提示词。</p>
+
+  <h3>3）/gen-images：独立的配图技能</h3>
+  <p>Gemini 根据提示词生成图片，自动下载、自动命名、自动归档到 <code>content/assets/日期/</code>。日常流程只要 <code>/idea</code> + <code>/daily</code>，只有补图才单独用 <code>/gen-images</code>。</p>
+  <p>[图3]</p>
+
+  <hr />
+
+  <h2>三、真实的执行方式（你可以直接照抄）</h2>
+  <p><code>/idea</code></p>
+  <p><code>/daily 2026-01-17 主题：全自动生成文章和图片</code></p>
+  <p>然后流程会自动完成：</p>
+  <ul>
+    <li>生成 3 篇文章文件</li>
+    <li>生成配图提示词</li>
+    <li>自动出图并放到资产目录</li>
+  </ul>
+  <p>你需要做的只有两件事：选定主题，简单检查质量。</p>
+
+  <hr />
+
+  <h2>四、质量不翻车的 3 个要点</h2>
+  <ol>
+    <li><strong>提示词一定要具体</strong>：写清楚“工具名、场景、风格”，再结合 AI 热点模块给出的关键词（如多模态/Agent/模型发布）。</li>
+    <li><strong>风格统一</strong>：每个平台的图风格一致，阅读体验会更专业。</li>
+    <li><strong>命名规范</strong>：用“平台+序号+用途”，比如：<code>wechat-图1-封面.png</code>。</li>
+  </ol>
+
+  <hr />
+
+  <h2>五、适合谁？</h2>
+  <ul>
+    <li>小白用户：不用从零搭流程，直接拿去用</li>
+    <li>职场人士：把写作、配图变成固定习惯</li>
+    <li>开发者：可以继续扩展成更复杂的自动化</li>
+  </ul>
+
+  <hr />
+
+  <h2>总结</h2>
+  <p>把内容生产做成流程，其实就是把“重复劳动”打包成技能。你不需要每天都很有灵感，但你需要一个<strong>稳定输出的系统</strong>。</p>
+
+  <hr />
+
+  <h2>🎁 福利环节</h2>
+  <p>[图4]</p>
+  <p>我用的是 <strong>Claude 顶尖模型</strong>，官方价格很高。在 AI Superman DJY 平台可以<strong>免费使用 Claude 顶尖模型</strong>，并且还有：</p>
+  <ul>
+    <li>Claude Code（跨行业自动化/写方案/改文档，也能写代码）</li>
+    <li>AI 导航（找工具）</li>
+    <li>AI 热点（抓主题）</li>
+    <li>AI 学习（系统化成长）</li>
+  </ul>
+  <p>Claude Code 不止写代码，各行业的流程自动化、文案、表格都能用。</p>
+  <p>日常我会从 AI 热点模块提炼话题，直接放进选题池，内容更容易被看到。</p>
+  <p>如果你也想体验，欢迎点赞+关注+私信我。</p>
+</body>
+</html>
